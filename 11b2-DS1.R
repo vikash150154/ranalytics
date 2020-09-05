@@ -14,7 +14,9 @@ rep(c(3,6,7,2),each=4)
 rep(c(3,6,7,2), times=4)
 
 ?rep
+r=seq(from=1, to =100,lenght.out=5)
 
+r
 x=50:100 #create seq of nos from 1 to 10
 x
 
@@ -53,7 +55,7 @@ class(x5b)
 #blank variable ?
 
 x=3.5677
-trunc(x)
+?trunc(x)
 round(x)
 floor(x)
 ceiling(x)
@@ -84,6 +86,10 @@ x6[c(2, -4)]    # cannot mix positive and negative integers
 #Error in x[c(2, -4)] : only 0's may be mixed with negative subscripts
 x6[c(2.4, 3.54)]    # real numbers are truncated to integers
 x6[c(2,3)]
+x6[2:10]
+x6[-length(x6)-1]
+x6[length(x6)-1]
+x6[seq(1,20,2)]
 
 x6[-c(1,5,20)]
 x6
@@ -105,6 +111,7 @@ x2
 #modify
 x6
 set.seed(1234) #when we want data to be replicated, we will use same sequence 
+
 (x6 = sample(1:50))
 
 (x6b = sort(sample(1:50)))
@@ -135,17 +142,30 @@ x7 = x6[1:4]; x7      # truncate x to first 4 elements
 #equal partitions within a range
 (x = seq(1,5, length.out = 25))
 x
+y
+y= seq(1,5, length.out=30)
+y
+z=seq(from=1, to = 30, length.out=50)
+z
 diff(x)
+diff(z)
 x = NULL
+z=NULL
+z
 x
 #NULL
 x[4]
 #NULL
 ?distribution
 ?rnorm
+
+z=rnorm(50)
+z
+hist(z)
+plot(density(z))
 (x = rnorm(100))
 plot(density(x))
-abline(v=c(-3,0,3))
+?abline(v=c(-3,0,3))
 mean(x)
 (x1 = rnorm(100, mean=50, sd=5))
 mean(x1)
@@ -159,19 +179,24 @@ summary(x1)
 quantile(x1)
 quantile(x1, seq(0,1,.25))
 quantile(x1,c(.1, .5, .8))
+
 quantile(x1,seq(0,1,.01))
-stem(x1)
+
+
+?stem(x1)
 
 #Matrix-----
 100:111
 length(100:111)
-matrix(1,ncol=3, nrow=4)
+?matrix(1,ncol=3, nrow=4)
 (m1 = matrix(100:111, nrow=4))
 (m2 = matrix(100:111, ncol=3, byrow=T))
 
+
 x=101:124
+
 length(x)
-matrix(x, ncol=6)
+matrix(x, ncol=6, nrow=3, byrow=F)
 class(m1)
 attributes(m1)
 dim(m1)
@@ -183,13 +208,14 @@ m1[,1]
 m1[,1, drop=F]
 m1[,-1]  #remove 1st column
 m1[1,2:3]
+m1[1,2]
+m1[2,3]
 m1[c(1,3),]
 m1[,-c(1,3), drop=F]
 m1[m1> 105 & m1 < 108]
 
 #names of cols and rows
 m1
-
 paste("C","D",sep="-")
 paste("C",1:100,sep="-")
 paste("C",1:3,sep='')
@@ -204,12 +230,14 @@ m1[,c(1,3)]
 (m3 = 1:24)
 m3
 dim(m3)= c(6,4)
+
 m3
 
 #access elements
 m2
 m2[1,]  #first row
 m2[c(1,3,4),]  #1st,3rd,4th row
+m2[c(1,2),]
 
 m2[,1]  #first col
 m2[,2:3] # 2nd to 3rd coln
@@ -239,14 +267,17 @@ m2[,2] = 10
 m2
 m2[m2> 107] = 9999
 m2
+rbind(m2,c(60,60,60))
 rbind(m2, c(50,60,70))
 rbind(m2,m2)
 m2
 cbind(m2, c(55,65,75,85))
 m2m2= cbind(m2,m2)
+
 m2m2
 m2
 cbind(m2,m2)
+
 rbind(m2,m2)
 #row and col wise summary
 
@@ -254,6 +285,7 @@ m1
 colSums(m1)
 rowSums(m1)
 colMeans(m1)
+
 rowMeans(m1)
 
 t(m1) # transpose
@@ -282,6 +314,7 @@ length(100:123)
 (product = paste('p', 1:3,sep='@'))
 (coy = paste('coy', 1:2,sep='%'))
 dimnames(a1) = list(loc, product, coy)
+
 a1
 apply(a1,1, sum) #locationwise
 apply(a1,2, sum) #productwise
@@ -304,9 +337,9 @@ marks1 ; marks2; course
 
 #create DF
 df1= data.frame(rollno, sname, gender, marks1, marks2, course, stringsAsFactors = F)
-str(df1) #structure of DF
-head(df1) #top 6 rows
-head(df1,n=3) #top 3 rows
+str(df1) #structure of DFhead(df1) #top 6 rows
+
+?head(df1,n=3) #top 3 rows
 tail(df1) #last 6 rows
 class(df1) # DF
 summary(df1) #summary
@@ -337,8 +370,6 @@ dim(df1)  #Dimensions
 aggregate(df1$marks1, by=list(df1$gender), FUN=sum)
 aggregate(marks1 ~ gender, data=df1, FUN=max)
 aggregate(cbind(marks1, marks2) ~ gender, data=df1, FUN=max)
-
-
 (df2 = aggregate(cbind(marks1,marks2) ~ gender + course, data=df1, FUN=mean))
 df2
 
