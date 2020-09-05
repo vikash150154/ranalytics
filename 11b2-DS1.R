@@ -3,9 +3,10 @@
 #control+enter when you are in the line to execute
 # Vectors-----
 c(2,4,6)
+?c
 ?seq
-seq(2,10,.5)
-seq(by=.5, from=2,to=3)
+seq(2,10,.3)
+seq(by=.5, from=2,to=10)
 rep(1:3,times=4)
 rep(1:3,each=4)
 
@@ -14,10 +15,15 @@ rep(c(3,6,7,2), times=4)
 
 ?rep
 
-x=1:10   #create seq of nos from 1 to 10
+x=50:100 #create seq of nos from 1 to 10
 x
-(x1 <- 1:20)  # brackets - assign & print
 
+(x1 <- 1:20)  # brackets - assign & print
+x[22]
+x[22:25]
+x=50:100
+x[seq(1,50,5)]
+x1
 (x1=1:30)
 (x2=c(1,2,13,4,5))
 class(x2)
@@ -34,6 +40,7 @@ class(x3b)
 class(x4)
 class(c(3,5))
 (x5a = c(3,5.5))
+x5a
 class(x5a)
 as.integer(x5a)
 
@@ -53,7 +60,7 @@ ceiling(x)
 
 #access elements
 ?seq
-(x6 = seq(0,100,by=3))
+(x6 = seq(0,100,by=3)) #vector(sequence) x6 which is from 0 to 100 with interval of 3
 seq(0,100,3)
 seq(to=100,from=0,by=3)
 seq(1,5,2)
@@ -62,9 +69,9 @@ seq(1,5,2)
 ls()  #variables in my environment
 x6
 length(x6)
-x6[1]; x6[21]
+x6[1]; x6[21] # combine two lines by a semicolon
 
-x6[1:5]
+x6[1:5];x6[8:20]
 x6[10:20]
 x6[ seq(1,length(x6), 2)]
 x6
@@ -80,14 +87,14 @@ x6[c(2,3)]
 
 x6[-c(1,5,20)]
 x6
-x6[x6 > 30]
+x6[x6 > 20]
 
 x6[x6 > 30 & x6 < 40]  # 31-39
 x6[x6 != 30]
 #or | and is &  !
 length(x6)
 x6
-x6[-(length(x6)-1)]
+x6[-(length(x6)-1)] # remove last element
 x2
 (x7 = c(x6, x2))
 
@@ -97,14 +104,18 @@ x2
 #------
 #modify
 x6
-set.seed(1234)
+set.seed(1234) #when we want data to be replicated, we will use same sequence 
 (x6 = sample(1:50))
+
 (x6b = sort(sample(1:50)))
 sort(x6)
+x6
 sort(x6[-c(1,2)])
 sort(x6, decreasing=T)
+sort(x6, decreasing=F)
+
 x6
-rev(x6)
+rev(x6) # REVERSING THE SEQUNCE OF DATA
 
 seq(-3, 10, by=.2)
 x6[-c(1:12)]
@@ -112,7 +123,7 @@ x6
 x6[x6> 30 & x6 < 40]
 (x = -3:2)
 x6
-x6[2:10] <- 99; x6        # modify 2nd element
+x6[2:10] <- 99; x6        # modify 2nd element VALUES FROM 2 TO 10 ARE REPLCED BY 99
 x6[x6 > 30 & x6 < 40] = 999
 x6
 
@@ -122,8 +133,9 @@ x7 = x6[1:4]; x7      # truncate x to first 4 elements
 
 1:5
 #equal partitions within a range
-(x = seq(1,5, length.out = 15))
+(x = seq(1,5, length.out = 25))
 x
+diff(x)
 x = NULL
 x
 #NULL
@@ -136,12 +148,13 @@ plot(density(x))
 abline(v=c(-3,0,3))
 mean(x)
 (x1 = rnorm(100, mean=50, sd=5))
+mean(x1)
 plot(density(x1))
 abline(v=mean(x1),h=0.04)
 hist(x1, breaks=7)
 hist(x1)
 hist(x1, freq=F)
-lines(density(x1), col=2)
+lines(density(x1), col=2) # superimposing 
 summary(x1)
 quantile(x1)
 quantile(x1, seq(0,1,.25))
