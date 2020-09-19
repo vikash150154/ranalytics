@@ -23,6 +23,7 @@ attributes(m1)  #properties necessary attribute is
 class(m1)  #matrix, array
 
 m1
+dimnames(m1)=list(c('jan', 'feb','march', 'apr'), paste('coy',1:6, sep=""))
 dimnames(m1)= list(c('Jan','Feb','Mar','Apr'), paste('coy',1:6, sep=''))
 m1 #4 months, 6 coys
 m3

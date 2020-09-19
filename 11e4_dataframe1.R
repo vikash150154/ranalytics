@@ -3,6 +3,7 @@
 #A data frame is a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column. ... The data stored in a data frame can be of numeric, factor or character type.
 
 mtcars
+?mtcars
 class(mtcars)
 
 #lets us create a DF of 50 students
@@ -15,14 +16,15 @@ sex = c('M','F')
 table(gender)
 (courses = c('BBA', 'MBA'))
 (course = sample(x=courses, size=sizeN, replace=T, prob=c(.4,.6)))
-
+table(course)
+prop.table(table(course)) # WE DONT GET THE SAME PROBABILITIES FOR SMALLER NUMBER 
 (gradetypes = LETTERS[1:4])
 (grades = sample(x=gradetypes, size=sizeN, replace=T, prob=c(.2,.3,.4, .1)))
 table(grades)
 (marks1 = trunc(rnorm(n=sizeN, mean=75, sd=5 ))) 
 (marks2 = trunc(runif(n=sizeN, min=60, max=95 ))) 
 
-vectorList = list (rollno, name, gender, course, grades, marks1, marks2)
+vectorList = list (rollno, name, gender, course, grades, marks1, marks2) # TO join a dataframe we have to have same number of elements
 mapply(length, vectorList)  #all are of length 50
 
 #df
@@ -40,9 +42,10 @@ length(df1)  #no of columns
 #selected 
 df1[1:4, 1:5]
 df1[1:5, c('rollno', 'name', 'gender')]
+df1[1:5, c(1,3,5)]
 df1[df1$gender == 'M', c('rollno', 'name','gender')]
 df1[df1$gender == 'M' & df1$marks1 > 80, c('rollno', 'name','gender')]
-df1[df1$grades %in% c('A','C') & df1$marks2 > 80 & df1$marks1 < 75, c('rollno', 'name','gender', 'grades', 'marks1', 'marks2')]
+df1[df1$grades %in% c('A','C') & df1$marks2 > 80 & df1$marks1 < 75, c('rollno', 'name','gender', 'grades', 'marks1', 'marks2')]df1[df1$grades %in% c('A','C') & (df1$marks2 > 80 | df1$marks1 < 75), c('rollno', 'name','gender', 'grades', 'marks1', 'marks2')]
 
 #summary
 aggregate(df1$marks1, by= list(df1$gender), FUN=max)
@@ -53,10 +56,13 @@ df1[order(df1$marks1),] #sort by marks1
 df1[order(df1$gender, df1$marks1),] #sort by gender marks1
 
 #factors
-(genderF = factor(gender))  #nominal data
+(genderF = factor(gender))#nominal data # creating a nominal data
+summary(genderF)
+summary(gender) 
 (courseF = factor(course))  #course data
 (gradesOF = factor(grades, ordered=T, levels = c('C','B','A','D')))
 #D is highest
+summary(gradesOF)
 
 barplot(table(grades), col=1:4)
 barplot(table(gradesOF), col=1:4)
