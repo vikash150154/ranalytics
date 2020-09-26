@@ -9,7 +9,6 @@ plot(women)
 (x =c(1,2,3,4,5,6,7,8,9,10))
 y= seq(11,20)
 plot(x,y)
-
 plot(x=women$height, y=women$weight)
 plot(women)
 plot(mtcars)
@@ -30,7 +29,24 @@ mtcars$cyl
 #plot(x=mtcars$wt, y=mtcars$mpg, col=mtcars$gear, pch=c(4,6,8), cex=c(1,2))
 #as.numeric(levels(as.factor(mtcars$cyl)))
 plot(women)
+
+
 abline(lm(women$weight ~ women$height), col='red', lty=2, lwd=4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #boxplot-----
 str(women)

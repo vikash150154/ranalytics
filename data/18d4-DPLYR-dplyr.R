@@ -2,10 +2,10 @@
 library(dplyr)
 #library(tidyverse)
 #Filter----
-
+mtcars
 filter(mtcars, cyl == 8)
 filter(mtcars, cyl < 6)
-
+filter(mtcars,cyci==7)
 # Multiple criteria
 filter(mtcars, cyl < 6 & vs == 1)
 filter(mtcars, cyl < 6 | vs == 1)
@@ -13,33 +13,45 @@ filter(mtcars, cyl < 6 | vs == 1)
 # Multiple arguments are equivalent to and
 filter(mtcars, cyl < 6, vs == 1)
 
-
+filter(mtcars, row_number()==1)
 filter(mtcars, row_number() == 1L)
 filter(mtcars, row_number() == n())
 filter(mtcars, between(row_number(), 5, n()-2))
+filter(mtcars, betweeen (row_number(),5, n()-2))
 
 
 
 #mutate----
+mtcars
 mutate(mtcars, displ_l = disp / 61.0237) #keeps other col
 transmute(mtcars, displ_l = disp / 61.0237) #removes other cols
 mutate(mtcars, cyl = NULL) #do not display cyl
 
 
 #slice-----
+mtcars
+slice(mtcars, 1)
 slice(mtcars, 1L)
+slice(mtcars,2)
 mtcars %>% slice(1L)
 slice(mtcars, n())
+slice(mtcars, 1:5)
+mtcars
 slice(mtcars, 5:n())
 slice(mtcars, c(2,4,5,10))
+slice(mtcars,1)
+by_cyl
 
 (by_cyl <- group_by(mtcars, cyl)) # ???
+group_by(mtcars,wt)
 slice(by_cyl, 1:2)
+slice(by_cyl,1:4)
 mtcars %>% group_by(cyl) %>% slice(1:2)
 #structure----
 tbl_df(mtcars) # convert to tbl class
 glimpse(mtcars)  # dense summary of tbl data
 View(mtcars) # spreasheet like form base pacakge
+View(women)
 
 mtcars %>% group_by(am) 
 #nothing - just separation
@@ -57,7 +69,7 @@ summarise(group_by(mtcars, cyl), m = mean(disp), sd = sd(disp))
 mtcars %>% group_by(am, gear) %>% summarise_all(mean)
 mtcars %>% group_by(am, gear)%>% summarise_all(c("min", "max"))  %>% as.data.frame()
 mtcars %>% group_by(am, gear)%>% summarise_all(list(med = median))
-
+group_by(mtcars,am)
 
 
 #without Group
@@ -69,8 +81,10 @@ mtcars %>% summarise_all(funs(med = median))
 
 
 #summarise if : 
+?summarise_if
 mtcars %>% summarise_if(is.numeric, mean, na.rm = TRUE)
-str(iris)  #Species is a factor
+?str(iris)  #Species is a factor
+
 iris %>% summarise_all(mean)
 
 iris %>% summarise_if(is.numeric, mean, na.rm = TRUE)
@@ -109,6 +123,8 @@ filter(mtcars, cyl == 4)
 
 #distinct rows
 distinct(mtcars)
+
+
 (df3  = data.frame(a=c(2,2,3),b=c(2,2,1)))
 distinct(df3)
 

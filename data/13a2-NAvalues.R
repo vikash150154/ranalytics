@@ -14,7 +14,7 @@ x
 mean(x)  #this will not work if NA values are present
 
 ?mean
-mean(x, na.rm=T)
+mean(x, na.rm=T) # true, remove missing values then do the sum
 (1+2+3)/3
 
 sum(x,na.rm=T)/3
@@ -46,12 +46,17 @@ sum(is.na(x2))
 #install this library
 library(VIM)
 ?sleep
+plot(sleep)
+head(sleep)
+complete.cases(sleep)
+sum(complete.cases(sleep))
 data(sleep, package='VIM')
 head(sleep) #first few rows of sleep
 dim(sleep)  #dimensions of sleep data
 complete.cases(sleep)  # which row have complete data in T/ F
 sum(complete.cases(sleep))  # no of rows have which no missing data
-sum(!complete.cases(sleep))  # no of rows which have missing data
+sum(!complete.cases(sleep)) 
+sleep[complete.cases(sleep),]# no of rows which have missing data
 sleep[complete.cases(sleep),]  #rows which are complete 42
 sleep[!complete.cases(sleep),] #rows which have missing values 20
 summary(sleep)

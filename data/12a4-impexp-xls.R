@@ -34,3 +34,5 @@ readxl::read_excel( "./data/mtcars.xlsx", 2, skip=1)
 ?`readxl-package`
 ?read_excel
 #end here
+library(readxl)
+read.xlsx("./data/mtcars.xls",'iris2')
