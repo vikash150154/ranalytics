@@ -18,6 +18,7 @@ names(mtcars)
 
 filter(mtcars, cyl == 6)
 filter(mtcars, cyl < 6)
+filter(mtcars, drat==3)
 
 # Multiple criteria
 filter(mtcars, cyl < 6 & vs == 1)
@@ -30,6 +31,7 @@ filter(mtcars, cyl < 6, vs == 1)
 filter(mtcars, row_number() == 1L)
 filter(mtcars, row_number() == n())
 filter(mtcars, between(row_number(), 5, n()))
+
 
 
 
@@ -46,10 +48,11 @@ slice(mtcars, n())
 slice(mtcars, 5:n())
 slice(mtcars, c(2,4,5,10))
 
-(by_cyl <- group_by(mtcars, cyl)) # ???
+?(by_cyl <- group_by(mtcars, cyl)) # ???
 slice(by_cyl, 1:2)
 
-#structure----
+#structure----ble
+tbl_df
 tbl_df(mtcars) # convert to tbl class
 glimpse(mtcars)  # dense summary of tbl data
 View(mtcars) # spreasheet like form base pacakge
@@ -71,6 +74,7 @@ head(df2[1:5])
 tibble::remove_rownames(df2)
 
 #rowid as column
+
 tibble::rowid_to_column(df, var = "rowid")
 
 #column to rownames
@@ -258,6 +262,7 @@ gtable_combine(list(mtcars, mtcars))
 dim_desc(mtcars)
 
 # combine applies the same coercion rules
+
 f1 <- factor("a")
 f2 <- factor("b")
 c(f1, f2)
@@ -267,7 +272,6 @@ gtable_combine(f1, f2)
 gtable_combine(list(f1, f2))
 
 slice( mtcars, c(1L,3L,2L,7L)) 
-
 by_cyl <- mtcars %>% group_by(cyl)
 # Select first row in each group
 mtcars %>% slice(1)
@@ -276,13 +280,12 @@ by_cyl %>% slice(1)
 mtcars %>% slice(n())
 by_cyl %>% slice(n())
 # Rows not present in group silently ignored
-mtcars %>% slice(10)
-by_cyl %>% slice(10)
+mtcars %>% slice(10)by_cyl %>% slice(10)
+
 
 # Select arbitrary rows
 mtcars %>% slice(1:9)
 by_cyl %>% slice(1:3)
-
 mtcars %>% slice(c(1, 3, 9))
 by_cyl %>% slice(c(1, 3, 5))
 
